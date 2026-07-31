@@ -1,0 +1,92 @@
+/* ==========================================================================
+   ADMIN.CSS
+   Styles used only by admin.html — kept separate so the public pages'
+   stylesheet footprint doesn't grow for a page visitors never see.
+   ========================================================================== */
+
+.admin-header {
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-gray-200);
+}
+.admin-header__inner {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+.admin-header__brand {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  color: var(--color-ink-navy);
+}
+.admin-header__brand span {
+  color: var(--color-palm-700);
+  font-weight: 600;
+  font-size: 0.85em;
+}
+
+.admin-main { min-height: 70vh; padding-block: var(--space-8); }
+
+.admin-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.admin-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  border-bottom: 2px solid var(--color-gray-200);
+  margin-bottom: var(--space-6);
+}
+.admin-tab {
+  padding: var(--space-3) var(--space-4);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--color-gray-600);
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+.admin-tab:hover { color: var(--color-palm-700); }
+.admin-tab.is-active { color: var(--color-palm-700); border-bottom-color: var(--color-gold-600); }
+.admin-tab__count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding-inline: 5px;
+  border-radius: 999px;
+  background: var(--color-gray-100);
+  color: var(--color-gray-600);
+  font-size: 0.72rem;
+  margin-left: var(--space-1);
+}
+
+.admin-table-wrap { overflow-x: auto; border: 1px solid var(--color-gray-200); border-radius: var(--radius-md); }
+.admin-table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+.admin-table th, .admin-table td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  border-bottom: 1px solid var(--color-gray-100);
+  vertical-align: top;
+  white-space: pre-wrap;
+}
+.admin-table th {
+  background: var(--color-parchment);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-palm-700);
+  white-space: nowrap;
+}
+.admin-table tbody tr:hover { background: var(--color-parchment); }

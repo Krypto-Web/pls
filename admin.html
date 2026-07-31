@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Prince Lanre Sanusi</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;0,900;1,500&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/variables.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <!--
+    Note: this page intentionally does NOT load supabase-client.js or
+    forms.js (the public insert-only helpers) or main.js (public-page
+    interactions) — admin.js has its own authenticated data layer.
+    components.js is loaded only for the shared toast() helper; since this
+    page has no #site-header/#site-footer mount points, it quietly skips
+    injecting the public navigation, which this page doesn't need.
+  -->
+  <script src="assets/js/components.js" defer></script>
+  <script src="assets/js/admin.js" defer></script>
+</head>
+<body data-page="">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="admin-header">
+    <div class="admin-header__inner">
+      <span class="admin-header__brand">Prince Lanre Sanusi <span>&mdash; Admin</span></span>
+      <a class="btn btn--sm btn--secondary" href="index">&larr; Back to Website</a>
+    </div>
+  </header>
+
+  <main id="main-content" class="admin-main">
+    <div class="container container--narrow">
+
+      <!-- ============ LOGIN ============ -->
+      <div class="form-card" id="adminLoginCard" style="max-width:420px;margin-inline:auto;">
+        <h1 style="font-size:1.4rem;text-align:center;">Administrator Access</h1>
+        <p class="text-lead" style="text-align:center;font-size:0.95rem;margin-bottom:var(--space-6);">Sign in to view website submissions.</p>
+        <form id="adminLoginForm" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="adminEmail">Email</label>
+            <input class="form-control" type="email" id="adminEmail" name="email" autocomplete="username" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="adminPassword">Password</label>
+            <input class="form-control" type="password" id="adminPassword" name="password" autocomplete="current-password" required>
+          </div>
+          <button class="btn btn--primary btn--block" type="submit">Log In</button>
+        </form>
+        <p class="form-hint" style="text-align:center;margin-top:var(--space-4);">Accounts are created in the Supabase Dashboard &mdash; there is no public sign-up.</p>
+      </div>
+
+      <!-- ============ DASHBOARD ============ -->
+      <div id="adminDashboard" hidden>
+        <div class="admin-toolbar">
+          <p>Signed in as <strong id="adminUserEmail"></strong></p>
+          <div style="display:flex;gap:var(--space-3);">
+            <button class="btn btn--sm btn--secondary" type="button" id="refreshAllBtn">Refresh All</button>
+            <button class="btn btn--sm btn--secondary" type="button" id="adminLogoutBtn">Log Out</button>
+          </div>
+        </div>
+
+        <div class="admin-tabs" role="tablist" aria-label="Submission tables">
+          <button class="admin-tab is-active" type="button" data-table="contact_messages" role="tab" aria-selected="true">Contact Messages<span class="admin-tab__count" id="tabCount-contact_messages"></span></button>
+          <button class="admin-tab" type="button" data-table="volunteer_signups" role="tab" aria-selected="false">Volunteer Sign-Ups<span class="admin-tab__count" id="tabCount-volunteer_signups"></span></button>
+          <button class="admin-tab" type="button" data-table="newsletter_subscribers" role="tab" aria-selected="false">Newsletter Subscribers<span class="admin-tab__count" id="tabCount-newsletter_subscribers"></span></button>
+        </div>
+
+        <div class="admin-panel" id="tablePanel-contact_messages" role="tabpanel"></div>
+        <div class="admin-panel" id="tablePanel-volunteer_signups" role="tabpanel" hidden></div>
+        <div class="admin-panel" id="tablePanel-newsletter_subscribers" role="tabpanel" hidden></div>
+      </div>
+
+    </div>
+  </main>
+</body>
+</html>
