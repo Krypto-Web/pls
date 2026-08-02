@@ -28,11 +28,11 @@
   // Placeholder hrefs ("#") — replace with verified, real profile URLs
   // before launch. See README.md > "Placeholder content to replace".
   const SOCIAL_LINKS = [
-    { label: 'X (Twitter)', href: '#', icon: 'x' },
-    { label: 'Instagram', href: '#', icon: 'instagram' },
-    { label: 'Facebook', href: '#', icon: 'facebook' },
+    { label: 'X (Twitter)', href: 'https://x.com/PrinceLanreSan1', icon: 'x' },
+    { label: 'Instagram', href: 'https://www.instagram.com/princelanresanusi01/', icon: 'instagram' },
+    { label: 'Facebook', href: 'https://web.facebook.com/princeolanrewajusanusi/', icon: 'facebook' },
     { label: 'LinkedIn', href: '#', icon: 'linkedin' },
-    { label: 'YouTube', href: '#', icon: 'youtube' }
+    { label: 'YouTube', href: 'https://www.youtube.com/@Iamprincelanresanusi', icon: 'youtube' }
   ];
 
   const ICONS = {
@@ -84,8 +84,8 @@
       '<div class="top-bar">' +
         '<div class="top-bar__inner">' +
           '<div class="top-bar__contacts">' +
-            '<a href="tel:+2348000000000">+234 800 000 0000</a>' +
-            '<a href="mailto:info@princelanresanusi.example.ng">info@princelanresanusi.example.ng</a>' +
+            '<a href="tel:+2348123456789">+234 812 345 6789</a>' +
+            '<a href="mailto:info@princelanresanusi.ng">info@princelanresanusi.ng</a>' +
           '</div>' +
           '<div class="top-bar__social">' + socialLinksHtml() + '</div>' +
         '</div>' +
