@@ -1,164 +1,230 @@
 <!DOCTYPE html>
+<!--
+  STANDALONE FILE — not linked from, or dependent on, the main pls-portfolio
+  project. Every style and script needed is inline right here, so you can
+  drop this one file anywhere (e.g. use it as a temporary index.html while
+  the full site is being finished, or host it on its own at a holding URL).
+  It submits to the SAME Supabase "newsletter_subscribers" table as the
+  main site, so anyone who signs up here is already on your list once the
+  full site launches.
+-->
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>News & Media | Prince Lanre Sanusi — Chairman, Amuwo-Odofin LG</title>
-  <meta name="description" content="Press releases, speeches, interviews, and photo/video coverage of Chairman Prince Lanre Sanusi and Amuwo-Odofin Local Government.">
-  <meta name="author" content="Office of the Executive Chairman, Amuwo-Odofin Local Government">
-  <meta property="og:title" content="News & Media | Prince Lanre Sanusi">
-  <meta property="og:description" content="The latest press coverage, speeches and media from the office of Chairman Sanusi.">
-  <meta property="og:type" content="website">
-  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;0,900;1,500&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/variables.css">
-  <link rel="stylesheet" href="assets/css/base.css">
-  <link rel="stylesheet" href="assets/css/layout.css">
-  <link rel="stylesheet" href="assets/css/components.css">
-  <link rel="stylesheet" href="assets/css/animations.css">
-  <script src="assets/js/supabase-client.js" defer></script>
-  <script src="assets/js/components.js" defer></script>
-  <script src="assets/js/forms.js" defer></script>
-  <script src="assets/js/main.js" defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coming Soon | Prince Lanre Sanusi — Chairman, Amuwo-Odofin LG</title>
+<meta name="description" content="The official website of Prince Lanre Sanusi, Executive Chairman of Amuwo-Odofin Local Government, is launching soon. Leave your email to be notified.">
+<meta property="og:title" content="Coming Soon | Prince Lanre Sanusi">
+<meta property="og:description" content="Grassroots Development, Transparent Leadership — launching soon.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,500&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-950:#052A19; --green-800:#0A4028; --green-700:#17754A; --green-600:#1F9457;
+    --gold-600:#B8902E; --gold-500:#D4AF37;
+    --white:#FFFFFF;
+    --font-serif:'Fraunces',Georgia,'Times New Roman',serif;
+    --font-sans:'Public Sans','Segoe UI',Roboto,Arial,sans-serif;
+  }
+  *,*::before,*::after{ box-sizing:border-box; }
+  html,body{ height:100%; }
+  body{
+    margin:0; min-height:100vh; display:flex; flex-direction:column;
+    font-family:var(--font-sans); color:var(--white);
+    background:
+      radial-gradient(circle at 15% 20%, rgba(212,175,55,0.16), transparent 42%),
+      radial-gradient(circle at 85% 80%, rgba(212,175,55,0.10), transparent 45%),
+      linear-gradient(160deg, var(--green-950) 0%, var(--green-800) 55%, var(--green-700) 100%);
+    position:relative; overflow-x:hidden;
+  }
+  body::before{
+    content:""; position:fixed; inset:0; opacity:0.05; pointer-events:none;
+    background-image:
+      repeating-linear-gradient(45deg, var(--gold-500) 0 2px, transparent 2px 30px),
+      repeating-linear-gradient(-45deg, var(--gold-500) 0 2px, transparent 2px 30px);
+  }
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{ animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
+  }
+
+  .flag-stripe{
+    height:5px; flex-shrink:0;
+    background:linear-gradient(to right, var(--green-600) 0 33.333%, var(--white) 33.333% 66.666%, var(--green-600) 66.666% 100%);
+  }
+
+  .wrap{ flex:1; display:flex; align-items:center; justify-content:center; padding:2.5rem 1.25rem; position:relative; z-index:1; }
+  .card{ max-width:600px; width:100%; text-align:center; animation:fadeUp 0.8s ease both; }
+  @keyframes fadeUp{ from{ opacity:0; transform:translateY(18px);} to{ opacity:1; transform:none; } }
+  @media (prefers-reduced-motion: reduce){ .card{ animation:none; } }
+
+  .seal{ margin:0 auto 1.5rem; }
+  .eyebrow{ font-weight:700; font-size:0.78rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold-500); margin:0 0 0.9rem; }
+  h1{ font-family:var(--font-serif); font-weight:800; font-size:clamp(2rem,5vw,3rem); line-height:1.12; margin:0 0 0.75rem; color:var(--white); text-wrap:balance; }
+  .tagline{ font-family:var(--font-serif); font-style:italic; font-weight:500; color:var(--gold-500); font-size:1.15rem; margin:0 0 1.4rem; }
+  .lede{ color:#DCE2E5; font-size:1.02rem; line-height:1.65; max-width:46ch; margin:0 auto 2.1rem; }
+
+  form{ margin-bottom:2.3rem; }
+  .field-row{ display:flex; gap:0.6rem; flex-wrap:wrap; justify-content:center; }
+  .input{
+    flex:1; min-width:220px; max-width:320px; padding:0.85rem 1.1rem; border-radius:6px;
+    border:1px solid rgba(255,255,255,0.28); background:rgba(255,255,255,0.08); color:var(--white); font-size:0.95rem; font-family:inherit;
+  }
+  .input::placeholder{ color:rgba(255,255,255,0.55); }
+  .input:focus{ outline:3px solid var(--gold-500); outline-offset:2px; background:rgba(255,255,255,0.12); }
+  .btn{
+    padding:0.85rem 1.6rem; border-radius:6px; border:none; background:var(--gold-600); color:var(--green-950);
+    font-weight:700; font-size:0.95rem; font-family:inherit; cursor:pointer;
+    transition:background 0.15s ease, transform 0.15s ease;
+  }
+  .btn:hover{ background:var(--gold-500); transform:translateY(-2px); }
+  .btn:disabled{ opacity:0.7; cursor:not-allowed; transform:none; }
+  .honeypot{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+  .feedback{ min-height:1.4em; margin:0.9rem 0 0; font-size:0.9rem; font-weight:600; }
+  .feedback--success{ color:#8FE3B3; }
+  .feedback--error{ color:#F3A6A0; }
+
+  .socials-label{ font-size:0.82rem; color:#B9C2C0; margin-bottom:0.85rem; }
+  .social-row{ display:flex; justify-content:center; gap:0.75rem; }
+  .social-row a{
+    width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    border:1px solid rgba(255,255,255,0.28); color:var(--white);
+    transition:background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  }
+  .social-row a:hover, .social-row a:focus-visible{ background:var(--gold-500); border-color:var(--gold-500); color:var(--green-950); }
+  .social-row svg{ width:16px; height:16px; display:block; }
+
+  .foot{ text-align:center; padding:1.25rem; font-size:0.78rem; color:#AEB8B5; position:relative; z-index:1; }
+  .foot .tag{ color:var(--gold-500); font-weight:700; }
+
+  .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  :focus-visible{ outline:3px solid var(--gold-500); outline-offset:2px; }
+
+  @media (max-width:480px){
+    .field-row{ flex-direction:column; align-items:stretch; }
+    .input, .btn{ max-width:none; }
+  }
+</style>
 </head>
-<body data-page="news">
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  <div id="site-header"></div>
+<body>
+  <div class="flag-stripe" aria-hidden="true"></div>
 
-  <main id="main-content">
-
-    <section class="page-banner lattice-bg">
-      <div class="container">
-        <p class="eyebrow">Newsroom</p>
-        <h1>News &amp; Media</h1>
-        <p>Press coverage, speeches, and moments from across Amuwo-Odofin Local Government.</p>
+  <main class="wrap">
+    <div class="card">
+      <div class="seal" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="76" height="76" role="img">
+          <circle cx="32" cy="32" r="30" fill="#052A19"/>
+          <circle cx="32" cy="32" r="30" fill="none" stroke="#D4AF37" stroke-width="1.5"/>
+          <circle cx="32" cy="32" r="25" fill="none" stroke="#D4AF37" stroke-width="1"/>
+          <g stroke="#D4AF37" stroke-width="1">
+            <line x1="32" y1="4" x2="32" y2="8"/><line x1="32" y1="56" x2="32" y2="60"/>
+            <line x1="4" y1="32" x2="8" y2="32"/><line x1="56" y1="32" x2="60" y2="32"/>
+            <line x1="11.5" y1="11.5" x2="14.3" y2="14.3"/><line x1="49.7" y1="49.7" x2="52.5" y2="52.5"/>
+            <line x1="11.5" y1="52.5" x2="14.3" y2="49.7"/><line x1="49.7" y1="14.3" x2="52.5" y2="11.5"/>
+          </g>
+          <text x="32" y="39" font-family="Georgia, serif" font-weight="700" font-size="16" fill="#F6FAF7" text-anchor="middle">PLS</text>
+        </svg>
       </div>
-    </section>
 
-    <!-- ============ PRESS & MEDIA COVERAGE ============ -->
-    <section class="section" aria-labelledby="press-heading">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Press Coverage</p>
-          <h2 id="press-heading">In the Media</h2>
+      <p class="eyebrow">Office of the Executive Chairman &middot; Amuwo-Odofin Local Government</p>
+      <h1>Something New Is Coming</h1>
+      <p class="tagline">&ldquo;Grassroots Development, Transparent Leadership.&rdquo;</p>
+      <p class="lede">We're building a new home for news, projects, and direct engagement with the people of Amuwo-Odofin. Leave your email below and we'll let you know the moment it's live.</p>
+
+      <form id="notifyForm" novalidate>
+        <div class="field-row">
+          <label class="sr-only" for="notifyEmail">Email address</label>
+          <input class="input" type="email" id="notifyEmail" name="email" placeholder="you@example.com" autocomplete="email" required>
+          <button class="btn" type="submit">Notify Me</button>
         </div>
-        <div class="grid grid--2 reveal-stagger">
-          <article class="card" style="flex-direction:row;">
-            <div class="card__body">
-              <div class="card__meta"><span class="card__tag">Media Recognition</span><time class="card__date" datetime="2026-07-08">8 July 2026</time></div>
-              <h3 class="card__title">NUJ Lagos Names Chairman Sanusi Media Games Ambassador</h3>
-              <p class="card__excerpt">The Nigeria Union of Journalists' Lagos State Council honoured Chairman Sanusi ahead of the 2026 NUJ Media Games, presented by Media Games Committee Chairman Mr Adeleye Ajayi at the Secretariat.</p>
-              <p class="form-hint">Source: Vanguard / The Sun Nigeria — <em>[add confirmed article link]</em></p>
-            </div>
-          </article>
-          <article class="card" style="flex-direction:row;">
-            <div class="card__body">
-              <div class="card__meta"><span class="card__tag">Infrastructure</span><time class="card__date" datetime="2025-10-16">16 October 2025</time></div>
-              <h3 class="card__title">Chairman Flags Off Road 23 Rehabilitation</h3>
-              <p class="card__excerpt">Coverage of the flag-off ceremony in FESTAC Town, where the Chairman described the road as a critical commercial artery for the community.</p>
-              <p class="form-hint">Source: Nigeria Construction News — <em>[add confirmed article link]</em></p>
-            </div>
-          </article>
-          <article class="card" style="flex-direction:row;">
-            <div class="card__body">
-              <div class="card__meta"><span class="card__tag">Sanitation</span><time class="card__date" datetime="2025-08-19">19 August 2025</time></div>
-              <h3 class="card__title">Multi-Agency Sanitation Exercise Sweeps Festac Town</h3>
-              <p class="card__excerpt">Reports on the joint clean-up operation with LASTMA, KAI Brigade, the Nigeria Police and state task forces, clearing illegal structures and shanties.</p>
-              <p class="form-hint">Source: Local press coverage — <em>[add confirmed article link]</em></p>
-            </div>
-          </article>
-          <article class="card" style="flex-direction:row;">
-            <div class="card__body">
-              <div class="card__meta"><span class="card__tag">Election</span><time class="card__date" datetime="2025-07-17">17 July 2025</time></div>
-              <h3 class="card__title">LASIEC Presents Certificate of Return to Chairman Sanusi</h3>
-              <p class="card__excerpt">Prince Lanre Sanusi and Vice Chairman Maureen Chika Ashara received their Certificates of Return, sealing their election victory for Amuwo-Odofin LG.</p>
-              <p class="form-hint">Source: <a href="https://festaconline.com.ng/amuwodecides25-laseic-presents-certificate-of-return-newly-elected-officials/" target="_blank" rel="noopener noreferrer">FestacOnline</a></p>
-            </div>
-          </article>
+        <div class="honeypot" aria-hidden="true">
+          <label>Leave this field blank<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+        </div>
+        <p class="feedback" id="notifyFeedback" role="status" aria-live="polite"></p>
+      </form>
+
+      <div class="socials">
+        <p class="socials-label">In the meantime, follow along</p>
+        <div class="social-row">
+          <a href="#" aria-label="X (Twitter)" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2h3.3l-7.2 8.2L23.5 22h-6.7l-5.2-6.8L5.6 22H2.3l7.7-8.8L1 2h6.9l4.7 6.2L18.9 2Zm-1.2 18h1.8L7.3 4h-2l12.4 16Z"/></svg></a>
+          <a href="#" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c2.7 0 3 0 4.1.06 1.1.05 1.8.22 2.5.47.7.27 1.2.6 1.8 1.16.5.5.9 1.1 1.16 1.8.25.7.42 1.4.47 2.5.06 1.1.06 1.4.06 4.1s0 3-.06 4.1c-.05 1.1-.22 1.8-.47 2.5a5 5 0 0 1-1.16 1.8 5 5 0 0 1-1.8 1.16c-.7.25-1.4.42-2.5.47-1.1.06-1.4.06-4.1.06s-3 0-4.1-.06c-1.1-.05-1.8-.22-2.5-.47a5 5 0 0 1-1.8-1.16 5 5 0 0 1-1.16-1.8c-.25-.7-.42-1.4-.47-2.5C2 15 2 14.7 2 12s0-3 .06-4.1c.05-1.1.22-1.8.47-2.5.27-.7.6-1.2 1.16-1.8.5-.5 1.1-.9 1.8-1.16.7-.25 1.4-.42 2.5-.47C9 2 9.3 2 12 2Zm0 1.8c-2.66 0-2.97 0-4.02.06-.87.04-1.34.18-1.65.3-.42.16-.7.35-1.02.66-.32.32-.5.6-.66 1.02-.12.31-.26.78-.3 1.65C4.3 8.03 4.3 8.34 4.3 11s0 2.97.05 4.02c.04.87.18 1.34.3 1.65.16.42.34.7.66 1.02.32.32.6.5 1.02.66.31.12.78.26 1.65.3 1.05.05 1.36.05 4.02.05s2.97 0 4.02-.05c.87-.04 1.34-.18 1.65-.3.42-.16.7-.34 1.02-.66.32-.32.5-.6.66-1.02.12-.31.26-.78.3-1.65.05-1.05.05-1.36.05-4.02s0-2.97-.05-4.02c-.04-.87-.18-1.34-.3-1.65a2.75 2.75 0 0 0-.66-1.02 2.75 2.75 0 0 0-1.02-.66c-.31-.12-.78-.26-1.65-.3C14.97 3.8 14.66 3.8 12 3.8Zm0 3.15a5.05 5.05 0 1 1 0 10.1 5.05 5.05 0 0 1 0-10.1Zm0 1.8a3.25 3.25 0 1 0 0 6.5 3.25 3.25 0 0 0 0-6.5Zm5.25-1.98a1.18 1.18 0 1 1-2.36 0 1.18 1.18 0 0 1 2.36 0Z"/></svg></a>
+          <a href="#" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8.4h2.8l.4-3.3h-3.2V8.1c0-.95.27-1.6 1.63-1.6H17V3.5C16.7 3.46 15.7 3.37 14.5 3.37c-2.44 0-4.11 1.49-4.11 4.22v2.35H7.6v3.3h2.79V22h3.11Z"/></svg></a>
+          <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.66 4.78 6.1V21h-4v-5.6c0-1.34-.02-3.06-1.87-3.06-1.87 0-2.16 1.46-2.16 2.96V21h-4V9Z"/></svg></a>
+          <a href="#" aria-label="YouTube" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.5 7.2s-.22-1.57-.9-2.26c-.86-.9-1.82-.9-2.26-.96C16.2 3.7 12 3.7 12 3.7h-.01s-4.2 0-7.34.28c-.44.06-1.4.06-2.26.96-.68.69-.9 2.26-.9 2.26S1.2 9 1.2 10.8v1.4c0 1.8.28 3.6.28 3.6s.22 1.57.9 2.26c.86.9 1.98.87 2.48.97 1.8.17 7.14.27 7.14.27s4.2-.01 7.34-.28c.44-.06 1.4-.06 2.26-.96.68-.69.9-2.26.9-2.26s.28-1.8.28-3.6v-1.4c0-1.8-.28-3.6-.28-3.6ZM9.7 14.9V8.7l6 3.1-6 3.1Z"/></svg></a>
         </div>
       </div>
-    </section>
-
-    <!-- ============ SPEECHES & STATEMENTS ============ -->
-    <section class="section section--alt" aria-labelledby="speeches-heading">
-      <div class="container container--narrow">
-        <p class="eyebrow" style="justify-content:center;">Speeches &amp; Statements</p>
-        <h2 id="speeches-heading" class="text-center">In His Own Words</h2>
-        <div class="card" style="padding:var(--space-6);margin-top:var(--space-6);">
-          <h3 style="font-size:1.05rem;">Inaugural Address — July 2025</h3>
-          <p style="color:var(--color-gray-600);">On assuming office, Chairman Sanusi pledged a government centred on sanitation and the environment, road construction and infrastructure, youth empowerment and education, and inclusive, transparent governance — promising residents that every voice would be heard.</p>
-        </div>
-        <div class="card" style="padding:var(--space-6);margin-top:var(--space-5);">
-          <h3 style="font-size:1.05rem;">On Receiving the NUJ Media Games Ambassador Honour — July 2026</h3>
-          <p style="color:var(--color-gray-600);">Chairman Sanusi expressed heartfelt gratitude to the NUJ for recognising the administration's work for the Amuwo-Odofin community, and reaffirmed his commitment to continued, visible progress.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ SOCIAL MEDIA ============ -->
-    <section class="section" aria-labelledby="social-heading">
-      <div class="container">
-        <div class="section-head section-head--center">
-          <p class="eyebrow">Straight From the Source</p>
-          <h2 id="social-heading">Follow the Conversation</h2>
-        </div>
-        <p class="text-center" style="max-width:60ch;margin-inline:auto;">Real posts from the Chairman's verified social accounts, embedded directly below.</p>
-
-        <!--
-          HOW TO ADD A REAL SOCIAL MEDIA POST (do this yourself, any time):
-          1. Open the real post on X/Twitter, Instagram, Facebook, etc.
-          2. Use that platform's own "Embed Post" / "Embed" share option —
-             it gives you a small block of HTML to copy.
-          3. Paste that HTML *inside* one of the three empty
-             <div class="social-embed-slot">...</div> blocks below,
-             replacing the placeholder <p> inside it.
-          4. Most platforms also need ONE script tag to render properly.
-             Add it once, right before </body> at the bottom of this file.
-             Examples:
-               X / Twitter:  <script async src="https://platform.twitter.com/widgets.js"></script>
-               Instagram:    <script async src="https://www.instagram.com/embed.js"></script>
-             (Facebook posts use an iframe embed and need no extra script.)
-          You only need the script for whichever platform(s) you actually use.
-        -->
-        <div class="grid grid--3" style="margin-top:var(--space-8);">
-          <div class="social-embed-slot" id="socialEmbed1">
-            <p class="placeholder-note">Social media post placeholder — paste a post's embed code here (see comment in the page's HTML source).</p>
-          </div>
-          <div class="social-embed-slot" id="socialEmbed2">
-            <p class="placeholder-note">Social media post placeholder — paste a post's embed code here (see comment in the page's HTML source).</p>
-          </div>
-          <div class="social-embed-slot" id="socialEmbed3">
-            <p class="placeholder-note">Social media post placeholder — paste a post's embed code here (see comment in the page's HTML source).</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ PHOTO & VIDEO GALLERY ============ -->
-    <section class="section" aria-labelledby="gallery-heading">
-      <div class="container">
-        <div class="section-head section-head--center">
-          <p class="eyebrow">Gallery</p>
-          <h2 id="gallery-heading">Photo &amp; Video Highlights</h2>
-        </div>
-        <div class="gallery-grid">
-          <button class="gallery-item" type="button" data-caption="Certificate of Return ceremony, July 2025"><img src="assets/images/placeholders/placeholder-square.svg" alt="Certificate of Return ceremony, July 2025" loading="lazy"></button>
-          <button class="gallery-item" type="button" data-caption="Inaugural address, July 2025"><img src="assets/images/placeholders/placeholder-square.svg" alt="Inaugural address, July 2025" loading="lazy"></button>
-          <button class="gallery-item" type="button" data-caption="Environmental sanitation exercise, Festac Town"><img src="assets/images/placeholders/placeholder-square.svg" alt="Environmental sanitation exercise, Festac Town" loading="lazy"></button>
-          <button class="gallery-item" type="button" data-caption="Road 23 rehabilitation flag-off"><img src="assets/images/placeholders/placeholder-square.svg" alt="Road 23 rehabilitation flag-off" loading="lazy"></button>
-          <button class="gallery-item" type="button" data-caption="Youth skills acquisition programme"><img src="assets/images/placeholders/placeholder-square.svg" alt="Youth skills acquisition programme" loading="lazy"></button>
-          <button class="gallery-item" type="button" data-caption="Community town hall meeting"><img src="assets/images/placeholders/placeholder-square.svg" alt="Community town hall meeting" loading="lazy"></button>
-          <button class="gallery-item" type="button" data-caption="NUJ Media Games Ambassador presentation, 2026"><img src="assets/images/placeholders/placeholder-square.svg" alt="NUJ Media Games Ambassador presentation, 2026" loading="lazy"></button>
-          <button class="gallery-item" type="button" data-caption="Vice Chairman Ashara at a community event"><img src="assets/images/placeholders/placeholder-square.svg" alt="Vice Chairman Ashara at a community event" loading="lazy"></button>
-        </div>
-        <p class="placeholder-note">Gallery images are placeholders — replace with real, rights-cleared event photography (see README).</p>
-      </div>
-    </section>
-
+    </div>
   </main>
 
-  <div id="site-footer"></div>
+  <footer class="foot">
+    <p>&copy; 2026 Office of the Executive Chairman, Amuwo-Odofin Local Government. <span class="tag">Open, Transparent and Accountable</span></p>
+  </footer>
+
+<script>
+(function () {
+  'use strict';
+
+  // Same Supabase project/table as the main site's newsletter form.
+  var SUPABASE_URL = 'https://boremnendxebtivsgazw.supabase.co';
+  var SUPABASE_KEY = 'sb_publishable_nZ4KIgw-TStt-XsMsLu6pA_NlfvK8jI';
+
+  var form = document.getElementById('notifyForm');
+  var feedback = document.getElementById('notifyFeedback');
+
+  function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+  function setFeedback(message, type) {
+    feedback.textContent = message;
+    feedback.className = 'feedback' + (type ? ' feedback--' + type : '');
+  }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    var honeypot = form.querySelector('input[name="website"]');
+    if (honeypot && honeypot.value) return; // likely a bot — silently ignore
+
+    var email = form.email.value.trim();
+    if (!isValidEmail(email)) {
+      setFeedback('Please enter a valid email address.', 'error');
+      return;
+    }
+
+    var btn = form.querySelector('button[type="submit"]');
+    var originalLabel = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    setFeedback('', '');
+
+    try {
+      var res = await fetch(SUPABASE_URL + '/rest/v1/newsletter_subscribers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_KEY,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({ email: email })
+      });
+
+      if (res.ok) {
+        setFeedback("You're on the list — we'll email you the moment we launch.", 'success');
+        form.reset();
+      } else if (res.status === 409) {
+        setFeedback("You're already on the list — thank you!", 'success');
+        form.reset();
+      } else {
+        setFeedback('Something went wrong. Please try again shortly.', 'error');
+      }
+    } catch (err) {
+      setFeedback('Network error — please check your connection and try again.', 'error');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = originalLabel;
+    }
+  });
+})();
+</script>
 </body>
 </html>
