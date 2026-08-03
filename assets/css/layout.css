@@ -139,6 +139,13 @@
   z-index: var(--z-overlay);
 }
 .nav-open .nav-overlay { opacity: 1; pointer-events: auto; }
+/* Fix: while the mobile menu is open, the header (and the nav links
+   nested inside it) must render above the dimming overlay, or taps
+   land on the overlay instead of the links underneath it. */
+.nav-open .top-bar,
+.nav-open .site-header {
+  z-index: 250;
+     }
 
 @media (min-width: 980px) {
   .nav-toggle { display: none; }
